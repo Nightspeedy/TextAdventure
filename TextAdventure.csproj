@@ -46,6 +46,7 @@
     <Compile Include="CommandLibrary.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Parser.cs" />
+    <Compile Include="Player.cs" />
     <Compile Include="Room.cs" />
     <Compile Include="Zuul.cs" />
   </ItemGroup>

@@ -5,16 +5,19 @@ namespace ZuulCS
 	public class Game
 	{
 		private Parser parser;
-		private Room currentRoom;
+        private Player player;
 
-		public Game ()
-		{
-			createRooms();
-			parser = new Parser();
+		public Game () {
+
+            parser = new Parser();
+            player = new Player();
+            createRooms();
+
+            
 		}
 
-		private void createRooms()
-		{
+		private void createRooms() {
+
 			Room outside, theatre, pub, lab, office;
 
 			// create the rooms
@@ -38,15 +41,16 @@ namespace ZuulCS
 
 			office.setExit("west", lab);
 
-			currentRoom = outside;  // start game outside
+			player.Currentroom = outside;  // start game outside
+
 		}
 
 
 		/**
 	     *  Main play routine.  Loops until end of play.
 	     */
-		public void play()
-		{
+		public void play() {
+
 			printWelcome();
 
 			// Enter the main command loop.  Here we repeatedly read commands and
@@ -57,19 +61,21 @@ namespace ZuulCS
 				finished = processCommand(command);
 			}
 			Console.WriteLine("Thank you for playing.");
+
 		}
 
 		/**
 	     * Print out the opening message for the player.
 	     */
-		private void printWelcome()
-		{
+		private void printWelcome() {
+
 			Console.WriteLine();
 			Console.WriteLine("Welcome to Zuul!");
 			Console.WriteLine("Zuul is a new, incredibly boring adventure game.");
 			Console.WriteLine("Type 'help' if you need help.");
 			Console.WriteLine();
-			Console.WriteLine(currentRoom.getLongDescription());
+			Console.WriteLine(player.Currentroom.getLongDescription());
+
 		}
 
 		/**
@@ -77,8 +83,8 @@ namespace ZuulCS
 	     * If this command ends the game, true is returned, otherwise false is
 	     * returned.
 	     */
-		private bool processCommand(Command command)
-		{
+		private bool processCommand(Command command) {
+
 			bool wantToQuit = false;
 
 			if(command.isUnknown()) {
@@ -94,9 +100,12 @@ namespace ZuulCS
 				case "go":
 					goRoom(command);
 					break;
-				case "quit":
+				case "ragequit":
 					wantToQuit = true;
 					break;
+                case "look":
+                    Console.WriteLine("player.Currentroom.getLongDescription()");
+                    break;
 			}
 
 			return wantToQuit;
@@ -109,37 +118,44 @@ namespace ZuulCS
 	     * Here we print some stupid, cryptic message and a list of the
 	     * command words.
 	     */
-		private void printHelp()
-		{
+		private void printHelp() {
+
 			Console.WriteLine("You are lost. You are alone.");
 			Console.WriteLine("You wander around at the university.");
 			Console.WriteLine();
 			Console.WriteLine("Your command words are:");
 			parser.showCommands();
+
 		}
 
 		/**
 	     * Try to go to one direction. If there is an exit, enter the new
 	     * room, otherwise print an error message.
 	     */
-		private void goRoom(Command command)
-		{
+		private void goRoom(Command command) {
+
 			if(!command.hasSecondWord()) {
+
 				// if there is no second word, we don't know where to go...
 				Console.WriteLine("Go where?");
+
 				return;
 			}
 
 			string direction = command.getSecondWord();
 
 			// Try to leave current room.
-			Room nextRoom = currentRoom.getExit(direction);
+			Room nextRoom = player.Currentroom.getExit(direction);
 
 			if (nextRoom == null) {
+
 				Console.WriteLine("There is no door to "+direction+"!");
+
 			} else {
-				currentRoom = nextRoom;
-				Console.WriteLine(currentRoom.getLongDescription());
+
+				player.Currentroom = nextRoom;
+				Console.WriteLine(player.Currentroom.getLongDescription());
+
 			}
 		}
 

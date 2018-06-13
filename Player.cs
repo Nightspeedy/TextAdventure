@@ -1,12 +1,48 @@
 ﻿using System;
-
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
 namespace ZuulCS {
 
-    public class Player {
+    class Player {
+
+        private Room currentRoom;
+        public int Health = 100;
+        public bool isDead = false;
+
+        public Room Currentroom {
+
+            get {
+
+                return currentRoom;
+
+            } set {
+
+                currentRoom = value;
+
+            }
+
+        }
 
         public Player() {
 
+
+        
+        }
+        public bool alive() {
+
+
+            if (Health <= 0) {
+
+                isDead = true;
+                return isDead;
+
+            } else {
+
+                return false;
+
+            }
         }
     }
 }
