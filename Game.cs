@@ -99,6 +99,7 @@ namespace ZuulCS
 					break;
 				case "go":
 					goRoom(command);
+                    player.damage(10);
 					break;
 				case "ragequit":
 					wantToQuit = true;

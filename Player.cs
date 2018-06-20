@@ -15,11 +15,22 @@ namespace ZuulCS {
             set { currentRoom = value; }
         }
 
-        public Player() {
+        public int damage(int amount) {
 
+            Health -= amount;
+            Console.WriteLine("Oh no! You lost some blood! Your health is now at : " + Health);
 
-        
+            return Health;
         }
+
+        public int heal(int amount)
+        {
+            
+            Health += amount;
+
+            return Health;
+        }
+
         public bool isAlive() {
             if (Health <= 0) {
                 return false;
