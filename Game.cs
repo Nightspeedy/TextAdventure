@@ -104,7 +104,7 @@ namespace ZuulCS
 					wantToQuit = true;
 					break;
                 case "look":
-                    Console.WriteLine("player.Currentroom.getLongDescription()");
+                    Console.WriteLine(player.Currentroom.getLongDescription());
                     break;
 			}
 

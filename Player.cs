@@ -9,20 +9,10 @@ namespace ZuulCS {
 
         private Room currentRoom;
         public int Health = 100;
-        public bool isDead = false;
 
         public Room Currentroom {
-
-            get {
-
-                return currentRoom;
-
-            } set {
-
-                currentRoom = value;
-
-            }
-
+            get { return currentRoom; }
+            set { currentRoom = value; }
         }
 
         public Player() {
@@ -30,19 +20,11 @@ namespace ZuulCS {
 
         
         }
-        public bool alive() {
-
-
+        public bool isAlive() {
             if (Health <= 0) {
-
-                isDead = true;
-                return isDead;
-
-            } else {
-
                 return false;
-
             }
+            return true;
         }
     }
 }
