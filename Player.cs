@@ -23,8 +23,7 @@ namespace ZuulCS {
             return Health;
         }
 
-        public int heal(int amount)
-        {
+        public int heal(int amount) {
             
             Health += amount;
 

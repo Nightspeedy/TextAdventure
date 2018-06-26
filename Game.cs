@@ -18,23 +18,27 @@ namespace ZuulCS
 
 		private void createRooms() {
 
-			Room outside, theatre, pub, lab, office;
+			Room outside, theatre, pub, lab, office, attic;
 
 			// create the rooms
 			outside = new Room("outside the main entrance of the university");
 			theatre = new Room("in a lecture theatre");
 			pub = new Room("in the campus pub");
 			lab = new Room("in a computing lab");
-			office = new Room("in the computing admin office");
+            office = new Room("in the computing admin office");
+            attic = new Room("on a dusty attic");
 
-			// initialise room exits
-			outside.setExit("east", theatre);
+
+            // initialise room exits
+            outside.setExit("east", theatre);
 			outside.setExit("south", lab);
 			outside.setExit("west", pub);
 
 			theatre.setExit("west", outside);
+            theatre.setExit("up", attic);
+            attic.setExit("down", theatre);
 
-			pub.setExit("east", outside);
+            pub.setExit("east", outside);
 
 			lab.setExit("north", outside);
 			lab.setExit("east", office);
@@ -99,7 +103,6 @@ namespace ZuulCS
 					break;
 				case "go":
 					goRoom(command);
-                    player.damage(10);
 					break;
 				case "ragequit":
 					wantToQuit = true;
@@ -156,9 +159,10 @@ namespace ZuulCS
 
 				player.Currentroom = nextRoom;
 				Console.WriteLine(player.Currentroom.getLongDescription());
+                player.damage(10);
 
-			}
-		}
+            }
+        }
 
 	}
 }
