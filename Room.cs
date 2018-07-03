@@ -2,8 +2,10 @@ using System.Collections.Generic;
 
 namespace ZuulCS
 {
-	public class Room
-	{
+	public class Room {
+
+        private Inventory inventory;
+
 		private string description;
 		private Dictionary<string, Room> exits; // stores exits of this room.
 
@@ -12,17 +14,18 @@ namespace ZuulCS
 	     * "description" is something like "in a kitchen" or "in an open court
 	     * yard".
 	     */
-		public Room(string description)
-		{
+		public Room(string description) {
 			this.description = description;
 			exits = new Dictionary<string, Room>();
+
+            inventory = new Inventory();
+
 		}
 
 		/**
 	     * Define an exit from this room.
 	     */
-		public void setExit(string direction, Room neighbor)
-		{
+		public void setExit(string direction, Room neighbor) {
 			exits[direction] = neighbor;
 		}
 
@@ -30,8 +33,7 @@ namespace ZuulCS
 	     * Return the description of the room (the one that was defined in the
 	     * constructor).
 	     */
-		public string getShortDescription()
-		{
+		public string getShortDescription() {
 			return description;
 		}
 
@@ -40,8 +42,7 @@ namespace ZuulCS
 	     *     You are in the kitchen.
 	     *     Exits: north west
 	     */
-		public string getLongDescription()
-		{
+		public string getLongDescription() {
 			string returnstring = "You are ";
 			returnstring += description;
 			returnstring += ".\n";
@@ -53,8 +54,7 @@ namespace ZuulCS
 	     * Return a string describing the room's exits, for example
 	     * "Exits: north, west".
 	     */
-		private string getExitstring()
-		{
+		private string getExitstring() {
 			string returnstring = "Exits:";
 
 			// because `exits` is a Dictionary, we can't use a `for` loop
@@ -73,8 +73,7 @@ namespace ZuulCS
 	     * Return the room that is reached if we go from this room in direction
 	     * "direction". If there is no room in that direction, return null.
 	     */
-		public Room getExit(string direction)
-		{
+		public Room getExit(string direction) {
 			if (exits.ContainsKey(direction)) {
 				return (Room)exits[direction];
 			} else {

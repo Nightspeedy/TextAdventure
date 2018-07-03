@@ -8,7 +8,15 @@ namespace ZuulCS {
     class Player {
 
         private Room currentRoom;
+        private Inventory inventory;
+
         public int Health = 100;
+
+        public Player() {
+
+            inventory = new Inventory();
+
+        }
 
         public Room Currentroom {
             get { return currentRoom; }
