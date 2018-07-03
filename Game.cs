@@ -103,6 +103,9 @@ namespace ZuulCS
 					break;
 				case "go":
 					goRoom(command);
+                    if (player.Health <= 0) {
+                        wantToQuit = true;
+                    }
 					break;
 				case "ragequit":
 					wantToQuit = true;

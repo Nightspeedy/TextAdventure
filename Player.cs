@@ -20,6 +20,8 @@ namespace ZuulCS {
             Health -= amount;
             Console.WriteLine("Oh no! You lost some blood! Your health is now at : " + Health);
 
+
+
             return Health;
         }
 
