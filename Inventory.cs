@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ZuulCS{
+namespace ZuulCS {
 
     public class Inventory {
 

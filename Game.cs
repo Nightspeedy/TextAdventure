@@ -1,9 +1,8 @@
 ﻿using System;
 
-namespace ZuulCS
-{
-	public class Game
-	{
+namespace ZuulCS {
+
+	public class Game {
 		private Parser parser;
         private Player player;
 

@@ -1,21 +1,17 @@
 ﻿using System;
 
-namespace ZuulCS
-{
-	public class Parser
-	{
+namespace ZuulCS {
+	public class Parser {
 		private CommandLibrary commands;  // holds all valid command words
 
-		public Parser()
-		{
+		public Parser() {
 			commands = new CommandLibrary();
 		}
 
 		/**
 	     * Ask and interpret the user input. Return a Command object.
 	     */
-		public Command getCommand()
-		{
+		public Command getCommand() {
 			Console.Write("> ");     // print prompt
 
 			string word1 = null;
@@ -37,8 +33,7 @@ namespace ZuulCS
 		/**
 	     * Print out a list of valid command words.
 	     */
-		public void showCommands()
-		{
+		public void showCommands() {
 			commands.showAll();
 		}
 	}
