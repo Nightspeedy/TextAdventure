@@ -23,5 +23,8 @@ namespace ZuulCS {
         public void Drop(Item item) {
 
         }
+        public void add(Item item, string name) {
+            items.Add(name, item);
+        }
     }
 }

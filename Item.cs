@@ -7,7 +7,11 @@ namespace ZuulCS {
 
     public class Item
     {
-        private string description;
+        public string name { get; set; }
+        public string description { get; set; }
+        public int weight { get; set; }
+        public bool badItem { get; set; }
+        public bool heal { get; set; }
 
         public Item() {
             description = "A generic Item";

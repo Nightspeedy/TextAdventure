@@ -5,6 +5,7 @@ namespace ZuulCS
 	public class Room {
 
         private Inventory inventory;
+        internal Inventory Inventory { get => inventory; }
 
 		private string description;
 		private Dictionary<string, Room> exits; // stores exits of this room.

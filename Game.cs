@@ -26,6 +26,7 @@ namespace ZuulCS {
 			lab = new Room("in a computing lab");
             office = new Room("in the computing admin office");
             attic = new Room("on a dusty attic");
+            attic.Inventory.add(new Apple(), "Apple");
 
 
             // initialise room exits
