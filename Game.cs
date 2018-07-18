@@ -26,7 +26,10 @@ namespace ZuulCS {
 			lab = new Room("in a computing lab");
             office = new Room("in the computing admin office");
             attic = new Room("on a dusty attic");
-            attic.Inventory.add(new Apple(), "Apple");
+
+            // Add items to rooms
+            attic.Inventory.add(new Apple(false, 5));
+            theatre.Inventory.add(new Knife());
 
 
             // initialise room exits
@@ -36,6 +39,8 @@ namespace ZuulCS {
 
 			theatre.setExit("west", outside);
             theatre.setExit("up", attic);
+
+
             attic.setExit("down", theatre);
 
             pub.setExit("east", outside);
@@ -97,23 +102,38 @@ namespace ZuulCS {
 			}
 
 			string commandWord = command.getCommandWord();
-			switch (commandWord) {
-				case "help":
-					printHelp();
-					break;
-				case "go":
-					goRoom(command);
-                    if (player.Health <= 0) {
+            switch (commandWord)
+            {
+                case "help":
+                    printHelp();
+                    break;
+                case "go":
+                    goRoom(command);
+                    if (player.Health <= 0)
+                    {
                         wantToQuit = true;
                     }
-					break;
-				case "ragequit":
-					wantToQuit = true;
-					break;
+                    break;
+                case "ragequit":
+                    wantToQuit = true;
+                    break;
                 case "look":
                     Console.WriteLine(player.Currentroom.getLongDescription());
+                    player.Currentroom.Inventory.GetItemsRoom();
                     break;
-			}
+                case "take":
+                    player.Currentroom.Inventory.Take(player.Inventory, command.getSecondWord());
+                    break;
+                case "drop":
+                    player.Inventory.Drop(player.Currentroom.Inventory, command.getSecondWord());
+                    break;
+                case "use":
+
+                    break;
+                case "inventory":
+                    player.Inventory.GetItemsPlayer();
+                    break;
+            }
 
 			return wantToQuit;
 		}
@@ -160,9 +180,12 @@ namespace ZuulCS {
 
 			} else {
 
+                Console.Clear();
 				player.Currentroom = nextRoom;
 				Console.WriteLine(player.Currentroom.getLongDescription());
                 player.damage(10);
+
+                Console.WriteLine(player.Currentroom);
 
             }
         }

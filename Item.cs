@@ -5,13 +5,12 @@ using System.Text;
 
 namespace ZuulCS {
 
-    public class Item
-    {
-        public string name { get; set; }
+    public class Item {
+
         public string description { get; set; }
-        public int weight { get; set; }
-        public bool badItem { get; set; }
-        public bool heal { get; set; }
+        public bool badItem;
+        public string name;
+
 
         public Item() {
             description = "A generic Item";

@@ -3,18 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ZuulCS {
+namespace ZuulCS
+{
 
-    public class Apple:Item {
+    public class Knife : Item {
 
-        public int healing = 5;
+        public int damage;
 
-        public Apple(bool bad, int heal) {
 
-            healing = heal;
-            this.badItem = bad;
-            this.name = "Apple";
+        public Knife() {
 
+            damage = 15;
+            this.badItem = true;
+            this.name = "Knife";
 
         }
 
@@ -23,7 +24,8 @@ namespace ZuulCS {
             if (o.GetType() == typeof(Player)) {
 
                 Player p = (Player)o; // must cast
-                p.heal(healing);
+                p.damage(damage);
+                Console.WriteLine("You've cut youself...");
 
             }
             else {
@@ -31,7 +33,6 @@ namespace ZuulCS {
                 Console.WriteLine("You can't use this item on this object!");
 
             }
-
         }
     }
 }

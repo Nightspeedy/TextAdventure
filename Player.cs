@@ -10,11 +10,13 @@ namespace ZuulCS {
         private Room currentRoom;
         private Inventory inventory;
 
+        internal Inventory Inventory { get => inventory; }
+
         public int Health = 100;
 
         public Player() {
 
-            inventory = new Inventory();
+            inventory = new Inventory(20);
 
         }
 

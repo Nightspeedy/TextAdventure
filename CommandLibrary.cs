@@ -13,7 +13,11 @@ namespace ZuulCS {
 				"go",
 				"ragequit",
 				"help",
-                "look"
+                "look",
+                "take",
+                "drop",
+                "use",
+                "inventory"
 			};
 		}
 
