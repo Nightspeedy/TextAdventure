@@ -20,12 +20,12 @@ namespace ZuulCS {
 			Room outside, theatre, pub, lab, office, attic;
 
 			// create the rooms
-			outside = new Room("outside the main entrance of the university");
-			theatre = new Room("in a lecture theatre");
-			pub = new Room("in the campus pub");
-			lab = new Room("in a computing lab");
-            office = new Room("in the computing admin office");
-            attic = new Room("on a dusty attic");
+			outside = new Room("outside the main entrance of the university", false);
+			theatre = new Room("in a lecture theatre", false);
+			pub = new Room("in the campus pub", false);
+			lab = new Room("in a computing lab", false);
+            office = new Room("in the computing admin office", false);
+            attic = new Room("on a dusty attic", true);
 
             // Add items to rooms
             attic.Inventory.add(new Apple(false, 5));
@@ -48,9 +48,10 @@ namespace ZuulCS {
 			lab.setExit("north", outside);
 			lab.setExit("east", office);
 
-			office.setExit("west", lab);
+            office.setExit("west", lab);
+            office.Inventory.add(new Key());
 
-			player.Currentroom = outside;  // start game outside
+            player.Currentroom = outside;  // start game outside
 
 		}
 
@@ -128,7 +129,7 @@ namespace ZuulCS {
                     player.Inventory.Drop(player.Currentroom.Inventory, command.getSecondWord());
                     break;
                 case "use":
-
+                    use(command);
                     break;
                 case "inventory":
                     player.Inventory.GetItemsPlayer();
@@ -138,8 +139,58 @@ namespace ZuulCS {
 			return wantToQuit;
 		}
 
-		// implementations of user commands:
+        // implementations of user commands:
+        private void use(Command command) {
 
+            Item i = null;
+            Room r = null;
+
+            if (command.hasSecondWord()) {
+
+                for (int e = player.Inventory.List.Count - 1; e >= 0; e--) {
+
+                    if (command.getSecondWord() == player.Inventory.List[e].name) {
+
+                        i = player.Inventory.List[e];
+                    }
+
+                }
+
+                if (command.hasThirdWord()) {
+
+                    Room roomToUnlock = player.Currentroom.getExit(command.getThirdWord());
+
+                        if (roomToUnlock == null) { 
+
+                            Console.WriteLine("There is no door to unlock in that direction!");
+                            return;
+
+                        } else {
+
+                            roomToUnlock.unlock();
+                            return;
+
+                        }
+
+                    }
+
+                if (i == null) {
+
+                    Console.WriteLine("The item you're trying to use does not exist!");
+
+                } else {
+
+                    i.use(player);
+
+                }
+
+            } else {
+
+                Console.WriteLine("Please specify an item to use!");
+
+            }
+
+        }
 		/**
 	     * Print out some help information.
 	     * Here we print some stupid, cryptic message and a list of the
@@ -174,21 +225,24 @@ namespace ZuulCS {
 			// Try to leave current room.
 			Room nextRoom = player.Currentroom.getExit(direction);
 
-			if (nextRoom == null) {
+            if (nextRoom == null) {
 
-				Console.WriteLine("There is no door to "+direction+"!");
+                Console.WriteLine("There is no door to " + direction + "!");
 
-			} else {
+            } else if (nextRoom.isLocked == true) {
+
+                Console.WriteLine("Looks like this door is locked... You need a key to enter here");
+
+            } else {
 
                 Console.Clear();
-				player.Currentroom = nextRoom;
-				Console.WriteLine(player.Currentroom.getLongDescription());
+                player.Currentroom = nextRoom;
+                Console.WriteLine(player.Currentroom.getLongDescription());
                 player.damage(10);
 
                 Console.WriteLine(player.Currentroom);
 
             }
         }
-
 	}
 }

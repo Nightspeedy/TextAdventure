@@ -4,10 +4,7 @@ using System.Linq;
 using System.Text;
 
 namespace ZuulCS {
-    /**
-        Class Inventory
-    
-    */
+
     public class Inventory {
 
         private List<Item> list;
@@ -28,6 +25,7 @@ namespace ZuulCS {
             string message = "Your inventory contains the following items";
 
             if (list.Count != 0) {
+
                 for (int i = 0; i < list.Count; i++) {
 
                     message += "\n" + list[i].name;
@@ -35,6 +33,7 @@ namespace ZuulCS {
                 }
 
                 Console.WriteLine(message);
+
             } else {
 
                 Console.WriteLine("There are no items in your inventory");
@@ -48,6 +47,7 @@ namespace ZuulCS {
             string message = "In this room you find:";
 
             if (list.Count != 0) {
+
                 for (int i = 0; i < list.Count; i++) {
 
                     message += "\n" + list[i].name;
@@ -107,7 +107,6 @@ namespace ZuulCS {
 
             for (int i = list.Count - 1; i >= 0; i--) {
 
-
                 if (!this.list.Any()) {
 
                 Console.WriteLine("This item does not exist in your inventory!");
@@ -120,6 +119,30 @@ namespace ZuulCS {
                     other.list.Add(list[i]);
                     Console.WriteLine("You dropped a " + list[i].name);
                     list.Remove(list[i]);
+
+                } else {
+
+                    Console.WriteLine("This item does not exist in your inventory!");
+
+                }
+            }
+            return null;
+        }
+
+        public Item Use(string item) {
+
+            for (int i = list.Count - 1; i >= 0; i--) {
+
+                if (!this.list.Any()) {
+
+                    Console.WriteLine("This item does not exist in your inventory!");
+                    return null;
+
+                }
+
+                if (list[i].name == item) {
+
+                    list[i].use(list[i].type);
 
                 } else {
 

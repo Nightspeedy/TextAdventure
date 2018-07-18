@@ -9,17 +9,19 @@ namespace ZuulCS
 
 		private string description;
 		private Dictionary<string, Room> exits; // stores exits of this room.
+        public bool isLocked;
 
 		/**
 	     * Create a room described "description". Initially, it has no exits.
 	     * "description" is something like "in a kitchen" or "in an open court
 	     * yard".
 	     */
-		public Room(string description) {
+		public Room(string description, bool locked) {
 			this.description = description;
 			exits = new Dictionary<string, Room>();
 
             inventory = new Inventory(300);
+            isLocked = locked;
 
 		}
 
@@ -70,17 +72,26 @@ namespace ZuulCS
 			return returnstring;
 		}
 
-		/**
+        /**
 	     * Return the room that is reached if we go from this room in direction
 	     * "direction". If there is no room in that direction, return null.
 	     */
-		public Room getExit(string direction) {
-			if (exits.ContainsKey(direction)) {
-				return (Room)exits[direction];
-			} else {
-				return null;
-			}
+        public Room getExit(string direction) {
+            if (exits.ContainsKey(direction)) {
+                return (Room)exits[direction];
+            } else {
+                return null;
+            }
 
-		}
-	}
+        }
+        public void unlock() {
+            if (this.isLocked) {
+                this.isLocked = false;
+                System.Console.WriteLine("You unlocked the door");
+            } else {
+                this.isLocked = true;
+                System.Console.WriteLine("You locked the door");
+            }
+        }
+    }
 }

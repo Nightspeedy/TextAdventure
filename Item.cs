@@ -10,7 +10,7 @@ namespace ZuulCS {
         public string description { get; set; }
         public bool badItem;
         public string name;
-
+        public string type;
 
         public Item() {
             description = "A generic Item";

@@ -3,32 +3,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ZuulCS
-{
+namespace ZuulCS {
 
-    public class Knife : Item {
+    public class Key : Item {
 
         public int damage;
 
 
-        public Knife() {
+        public Key() {
 
             damage = 15;
             this.badItem = true;
-            this.name = "Knife";
+            this.name = "Attic-Key";
 
         }
 
         public override void use(Object o) {
 
-            if (o.GetType() == typeof(Player)) {
+            if (o.GetType() == typeof(Room)) {
 
-                Player p = (Player) o; // must cast
-                p.damage(damage);
-                Console.WriteLine("You've cut youself...");
+                Room r = (Room)o; // must cast
+                r.unlock();
 
-            }
-            else {
+            } else {
 
                 Console.WriteLine("You can't use this item on this object!");
 
