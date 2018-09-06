@@ -130,6 +130,9 @@ namespace ZuulCS {
                     break;
                 case "use":
                     use(command);
+                    if (player.Health <= 0) {
+                        wantToQuit = true;
+                    }
                     break;
                 case "inventory":
                     player.Inventory.GetItemsPlayer();
@@ -143,7 +146,6 @@ namespace ZuulCS {
         private void use(Command command) {
 
             Item i = null;
-            Room r = null;
 
             if (command.hasSecondWord()) {
 
@@ -152,6 +154,7 @@ namespace ZuulCS {
                     if (command.getSecondWord() == player.Inventory.List[e].name) {
 
                         i = player.Inventory.List[e];
+
                     }
 
                 }
@@ -160,15 +163,22 @@ namespace ZuulCS {
 
                     Room roomToUnlock = player.Currentroom.getExit(command.getThirdWord());
 
-                        if (roomToUnlock == null) { 
+                        if (roomToUnlock == null) {
 
                             Console.WriteLine("There is no door to unlock in that direction!");
                             return;
 
                         } else {
 
-                            roomToUnlock.unlock();
-                            return;
+                            if (i == null) {
+
+                                Console.WriteLine("This item does not exist in your inventory!");
+                                return;
+                            } else {
+
+                                i.use(roomToUnlock);
+                                return;
+                            }
 
                         }
 
@@ -239,8 +249,6 @@ namespace ZuulCS {
                 player.Currentroom = nextRoom;
                 Console.WriteLine(player.Currentroom.getLongDescription());
                 player.damage(10);
-
-                Console.WriteLine(player.Currentroom);
 
             }
         }

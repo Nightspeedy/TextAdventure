@@ -52,6 +52,10 @@ namespace ZuulCS {
 		public bool hasSecondWord() {
 			return (secondWord != null);
 		}
+
+        /**
+        * Return true if the command has a third word.
+        */
         public bool hasThirdWord() {
             return (thirdWord != null);
         }

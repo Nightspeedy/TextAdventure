@@ -14,7 +14,6 @@ namespace ZuulCS {
 
         public Item() {
             description = "A generic Item";
-            System.Console.WriteLine("Item Constructor");
         }
 
         public virtual void use(Object o) {

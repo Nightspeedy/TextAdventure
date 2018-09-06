@@ -25,7 +25,11 @@ namespace ZuulCS
 
                 Player p = (Player) o; // must cast
                 p.damage(damage);
-                Console.WriteLine("You've cut youself...");
+
+                if (p.Health <= 0) {
+                }
+
+                Console.WriteLine("You've cut yourself...");
 
             }
             else {

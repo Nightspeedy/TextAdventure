@@ -13,7 +13,7 @@ namespace ZuulCS {
         public Key() {
 
             damage = 15;
-            this.badItem = true;
+            this.badItem = false;
             this.name = "Attic-Key";
 
         }
